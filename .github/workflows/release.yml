@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release-please:
+    name: Release Please
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: google-github-actions/release-please-action@v4
+        id: release
+        with:
+          release-type: node
+          path: projects/vercel-loader
+      - name: Checkout
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/checkout@v4
+      - name: Setup node
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/setup-node@v4
+      - name: Install
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm ci
+      - name: Build
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm run build
+      - name: Publish to NPM
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          cd dist/vercel-loader
+          npm config set '//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}'
+          npm publish
