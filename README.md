@@ -6,11 +6,13 @@ Provide an Angular image loader for Vercel.
 import { provideVercelLoader } from '@johnhwhite/vercel-loader';
 //...
 boostrapApplication(AppComponent, [
-  provideVercelLoader({
-    loader: 'lazy',
-    rootMargin: '200px',
-    threshold: 0.01,
-  }),
+  provideVercelLoader(),
 ]);
-
 ```
+## Build
+
+Run `ng build vercel-loader` to build the project. The build artifacts will be stored in the `dist/vercel-loader` directory.
+
+## Test
+
+Run `ng test vercel-loader` to execute the unit tests via [Jest](https://jestjs.io).
