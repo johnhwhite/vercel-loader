@@ -16,10 +16,10 @@ describe('provideVercelLoader', () => {
     expect(loader).toBeDefined();
     expect(loader({
       src: '/image.png',
-    })).toEqual('/_next/image?url=%2Fimage.png&q=75');
+    })).toEqual('/_vercel/image?url=%2Fimage.png&q=75');
     expect(loader({
       src: '/image.png',
       width: 100,
-    })).toEqual('/_next/image?url=%2Fimage.png&q=75&w=100');
+    })).toEqual('/_vercel/image?url=%2Fimage.png&q=75&w=100');
   });
 });

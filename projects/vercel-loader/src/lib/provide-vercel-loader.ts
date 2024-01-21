@@ -10,7 +10,7 @@ export function provideVercelLoader(): Provider[] {
     if (config.width) {
       params.set('w', `${config.width}`);
     }
-    return `/_next/image?${params.toString()}`;
+    return `/_vercel/image?${params.toString()}`;
   };
   return [{provide: IMAGE_LOADER, useValue: loaderFn}];
 }
